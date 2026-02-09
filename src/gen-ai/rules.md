@@ -6,4 +6,4 @@ There are still rules that define the boundaries for every interaction. Those ru
 
 ## Loops
 
-### Nested Loops
+### Nested loops
