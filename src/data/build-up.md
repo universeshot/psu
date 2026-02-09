@@ -11,7 +11,7 @@ In short, you take the largest desired dataset and keep adding reduced versions 
 
 Difficulty validating comprehension increases linearly with the size of "gaps" between data: gaps in data can be permissed in the presence of an ability to understand, but understanding is significantly harder to validate than knowing itself.
 
-![](input-to-target.png)
+![](ref/input-to-target.png)
 
 Notice the same core pattern is already repeating. 
 
@@ -27,7 +27,7 @@ Instead of continually narrowing the target, a prepared set of subcomponents can
 ### Understanding components
 This is possible in data by relying on blocks of understanding rather than knowledge components.
 
-![](bridged-k-understanding.png)
+![](ref/bridged-k-understanding.png)
 
 The exact data input is typically less important than the eventual state of understanding. 
 
@@ -39,15 +39,71 @@ Understanding a topic implies being able to correctly replace knowledge gaps thr
 
 Missing chunks in a single understanding component:
 
-![](kc-data-gaps.png)
+![](ref/kc-data-gaps.png)
 
 ---
 
 Missing chunks between formal understanding components:
 
-![](ic-gaps.png)
+![](ref/ic-gaps.png)
 
-### Chunks between components
+### Splitting components
+
+Once the bounds of the component being transferred have been identified, it can be prepared for transfer.
+
+If the transfer method allows the entire component size in one transfer operation, there is no need to split the component before transfer.
+
+![](ref/component-lt-bandwidth.png)
+
+Preparing a component for transfer is as simple as identifying appropriate boundaries, creating chunked data, and then preparing each chunk for transmission. 
+
+Standard protocols are usually agreed on to allowing any receiving end to make use of the seemingly scattered input. 
+
+![](ref/unit-transfer.png)
+
+While the unit's end state is appearing to be one piece, the receiver may retain knowledge about the boundaries of each piece input. This is especially important for the sake of error correction in case of any errors during transmission.
+
+Files may be chunked like this for transfer even within a single filesystem, so efficient data storage tools may opt to use a file storage mechanism that always stores data components in chunks. This makes data transit almost trivial since the data is in an always-ready state.
+
+The chunks are not guaranteed to be uniform shapes. This presents optimization opportunities. The component might be reshaped to better enable efficient chunking, or the chunks may be reorganized to try and better enable uniformity between the chunks. 
+
+### Component based teaching
+
+Component based teaching for any data is equivalent to how schools organize into subjects, subjects organize into key themes, and key themes are split down based on available lessons.
+
+![](ref/component-school.png)
+
+Instant transmission is not always a possiblility. 
+
+This is most commonly the case when the transmitter does not yet know the receiver, the transmitter has multiple wanting recipients, or there is some other restriction on bandwidth that forces delays between sending each chunk.
+
+This forces transmission to operate more like a queue system, where the transmitter will wait for requests and, on receiving a request with appropriate authorization, will pass information out at maximum speed.
+
+![](ref/queued-txn.png)
+
+The decision to handle any pre-processing will typically depend on any guaranteed likelihood of future requesting parties.
+
+Bandwidth available is not guaranteed until the requesting party is made apparent. The party with the lower bandwidth limit dictates transfer speed. If a new recipient has bandwidth forcing smaller chunks than the sender has prepared for, transmission will take additional time to account for unforeseen processing.
+
+There will be an additional buffer, between the unforeseen processing and transmission, in case the local chunk processors creates appropriately bitesized pieces at a rate still exceeding the available transmission bandwidth. 
+
+![](ref/preprocess-txn.png)
+
+If multiple recipients request transmission the host must calculate whether to fan out the information manually or defer the transmission.
+
+Deferring the transmission could be sending the data at a later time or asking a peer to send the data requested on the host's behalf.
+
+If the recipient ends up gathering the data from a mixture of the host and/or multiple of the host's peers, this forms an equivalent Peer-To-Peer (P2P) network.
+
+Which approach to take depends on a variety of factors mostly focused around host availability, peer availability, bandwidth vs latency requirements, and target location.
+
+![](ref/dist-fanout.png)
+
+![](ref/dist-deferred.png)
+
+![](ref/dist-p2p.png)
+
+## Chunk filling between components
 
 Missing chunks inbetween formal understanding components result from either or both missing knowledge and understanding components. Any time required to determine which implies both.
 
@@ -61,7 +117,7 @@ The goal is to sufficiently bridge all adjacent knowledge components. The approa
 
 Bridges may be formed using knowledge components or understanding components. The larger the gap, the more likely an understanding component will better enable filling the entire opportunity space.
 
-![](icg-ap1.png)
+![](ref/icg-ap1.png)
 
 Two open ends do not need to be capped by the same component type. Which is used will depend on the the features adjacent to each opening, as well as time constraints and resources available for use. 
 
@@ -73,11 +129,11 @@ _Assumption: immediate access is available for data forming adjacent components.
 
 Explore the immediately already-formed components to infer missing data.
 
-![](icg-ap2-p1.png)
+![](ref/icg-ap2-p1.png)
 
 All inferred data are considered hypotheses. Unless and until validated, that must be recorded in case of use during subsequent investigations. 
 
-![](icg-ap2-p2.png)
+![](ref/icg-ap2-p2.png)
 
 ---
 
@@ -85,4 +141,4 @@ All inferred data are considered hypotheses. Unless and until validated, that mu
 
 Introduce new vertices along known boundaries to create exploration origins. Build foundations and perform exploration either in serial or parallel.
 
-![](icg-ap3.png)
+![](ref/icg-ap3.png)
