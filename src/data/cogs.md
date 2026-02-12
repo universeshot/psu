@@ -81,3 +81,9 @@ New feature: aggregate base score (theme breadth value, scope covered value)
 - For all cogs preceding this, calculate the average (theme breadth value, scope covered value)
     - Note: using the previous cog's already calculated aggregate value helps prevent wasted computation
 ```
+
+
+## Impact across distance
+Assuming use of a truly reliable similarity score, the impact resulting from combining two components will be greater the further apart the owning cogs begin. 
+
+When dividing one component out, the resulting cogs will be increasingly distant according to how far the nearest created reagent is. Nearer closest reagents imply likelihood of further counterpart reagents. 
