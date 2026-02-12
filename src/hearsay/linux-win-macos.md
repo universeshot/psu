@@ -77,6 +77,8 @@ Sharing applications across devices is arguably easiest on MacOS thanks to the c
 
 Apple encourages interface designers with a brand focus on visual aesthetics. Some visual decisions are not well received but may still spread elsewhere in time.
 
+The strictness in the Apple ecosystem means that changes are typically pushed slowly and carefully. Limiting the review volume helps reduce friction during Apple's inevitable white-box validation.
+
 If a service, application, or other tool is intentionally created within the Apple ecosystem there is no guarantee that it will ever be ported out. This can be a conscious organizational choice, or it might be constraints on time and cash available for development.
 
 ## Funnel
